@@ -19,10 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * text widgets and anything else that runs shortcodes get the same diagrams
  * as the block.
  *
- *     [mermaid caption="Checkout" zoom download]
+ *     [graphdraw caption="Checkout" zoom download]
  *     flowchart LR
  *     A[Cart] --> B{Paid?}
- *     [/mermaid]
+ *     [/graphdraw]
  *
  * The attributes are those of the block: `theme`, `caption`, `zoom`,
  * `download`, `title`, `description` and `align`.
@@ -30,14 +30,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class Shortcode implements Hookable {
 
 	/**
-	 * The tag of the shortcode, unless something else registered it first.
+	 * The tag of the shortcode.
 	 */
-	const TAG = 'mermaid';
-
-	/**
-	 * The tag that is always this plugin's.
-	 */
-	const PREFIXED_TAG = 'graphdraw';
+	const TAG = 'graphdraw';
 
 	/**
 	 * The attributes, with their defaults.
@@ -84,8 +79,7 @@ final class Shortcode implements Hookable {
 	 * Adds the hooks of the shortcode to WordPress.
 	 */
 	public function hooks(): void {
-		// Late, so a plugin that has the `mermaid` tag keeps it.
-		add_action( 'init', array( $this, 'register' ), 20 );
+		add_action( 'init', array( $this, 'register' ) );
 		add_filter( 'no_texturize_shortcodes', array( $this, 'skip_texturize' ) );
 
 		// Before wpautop() at 10 and do_shortcode() at 11, and before do_blocks() at 9 runs a Shortcode block.
@@ -95,35 +89,26 @@ final class Shortcode implements Hookable {
 	}
 
 	/**
-	 * Registers the shortcode: under its prefixed tag, and under the short one
-	 * when no other plugin uses it.
+	 * Registers the shortcode.
 	 */
 	public function register(): void {
-		add_shortcode( self::PREFIXED_TAG, array( $this, 'render' ) );
-
-		if ( ! shortcode_exists( self::TAG ) ) {
-			add_shortcode( self::TAG, array( $this, 'render' ) );
-		}
+		add_shortcode( self::TAG, array( $this, 'render' ) );
 	}
 
 	/**
-	 * Returns the tags that run this shortcode now: another plugin may have
-	 * taken one over since it was registered.
+	 * Returns the tags that run this shortcode now: none when another plugin
+	 * has taken the tag over since it was registered.
 	 *
 	 * @return string[] The tags.
 	 */
 	public function get_tags(): array {
 		global $shortcode_tags;
 
-		$tags = array();
-
-		foreach ( array( self::TAG, self::PREFIXED_TAG ) as $tag ) {
-			if ( isset( $shortcode_tags[ $tag ] ) && array( $this, 'render' ) === $shortcode_tags[ $tag ] ) {
-				$tags[] = $tag;
-			}
+		if ( isset( $shortcode_tags[ self::TAG ] ) && array( $this, 'render' ) === $shortcode_tags[ self::TAG ] ) {
+			return array( self::TAG );
 		}
 
-		return $tags;
+		return array();
 	}
 
 	/**
@@ -186,7 +171,7 @@ final class Shortcode implements Hookable {
 	private function protect_match( array $shortcode ): string {
 		$code = isset( $shortcode[5] ) ? $shortcode[5] : '';
 
-		// Nothing to protect, or a shortcode written as text: [[mermaid]].
+		// Nothing to protect, or a shortcode written as text: [[graphdraw]].
 		if ( '' === $code || ( '[' === $shortcode[1] && ']' === $shortcode[6] ) ) {
 			return $shortcode[0];
 		}
@@ -228,7 +213,7 @@ final class Shortcode implements Hookable {
 	}
 
 	/**
-	 * Turns the flags written without a value, as in `[mermaid zoom]`, into
+	 * Turns the flags written without a value, as in `[graphdraw zoom]`, into
 	 * attributes that are on. WordPress lists those by number.
 	 *
 	 * @param array $attributes The attributes, as WordPress parsed them.

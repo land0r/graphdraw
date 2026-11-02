@@ -178,7 +178,7 @@ class PluginTest extends WP_UnitTestCase {
 
 		$this->assertSame( 9, has_action( 'init', array( $plugin->get( Assets::class ), 'register' ) ) );
 		$this->assertSame( 10, has_action( 'init', array( $plugin->get( Block::class ), 'register' ) ) );
-		$this->assertSame( 20, has_action( 'init', array( $plugin->get( Shortcode::class ), 'register' ) ) );
+		$this->assertSame( 10, has_action( 'init', array( $plugin->get( Shortcode::class ), 'register' ) ) );
 		$this->assertSame( 10, has_filter( 'the_content', array( $plugin->get( CodeBlocks::class ), 'render_content' ) ) );
 		$this->assertSame( 10, has_action( 'before_delete_post', array( $plugin->get( SavedImages::class ), 'delete_all' ) ) );
 		$this->assertFalse( has_action( 'admin_menu', array( $plugin->get( SettingsPage::class ), 'add_page' ) ) );
@@ -196,7 +196,7 @@ class PluginTest extends WP_UnitTestCase {
 		$plugin = $this->create_plugin();
 		$plugin->init();
 
-		$this->go_to( get_permalink( self::factory()->post->create( array( 'post_content' => '[mermaid]graph TD; A-->B[/mermaid]' ) ) ) );
+		$this->go_to( get_permalink( self::factory()->post->create( array( 'post_content' => '[graphdraw]graph TD; A-->B[/graphdraw]' ) ) ) );
 		do_action( 'wp_enqueue_scripts' );
 
 		$this->assertFalse( $this->get_container( $plugin )->has( ElementorRegistrar::class ) );

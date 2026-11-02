@@ -188,7 +188,7 @@ class DiagramTest extends WP_UnitTestCase {
 			$shortcode->render(
 				shortcode_parse_atts( 'theme="forest" zoom download caption="A <em>caption</em>" title="A &quot;title&quot;" description="What it shows" align="center"' ),
 				esc_html( $code ),
-				Shortcode::PREFIXED_TAG
+				Shortcode::TAG
 			),
 			$this->diagram->render(
 				array(
@@ -206,7 +206,7 @@ class DiagramTest extends WP_UnitTestCase {
 		);
 
 		$this->assertSame(
-			$shortcode->render( '', 'A[x] --&gt; B', Shortcode::PREFIXED_TAG ),
+			$shortcode->render( '', 'A[x] --&gt; B', Shortcode::TAG ),
 			$this->diagram->render( array( 'code' => 'A[x] --> B' ) )
 		);
 	}

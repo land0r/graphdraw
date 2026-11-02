@@ -29,7 +29,7 @@ This makes it easy to include **text-based diagrams** in the block editor withou
 - A title and a description of each diagram for screen readers.
 - Optionally, a saved image of each diagram, for feeds and for browsers that run no JavaScript, which otherwise show its Mermaid code.
 - A Mermaid Diagram widget for Elementor, with the block's settings and a live preview.
-- A `[mermaid]` shortcode for the classic editor, page builders and text widgets.
+- A `[graphdraw]` shortcode for the classic editor, page builders and text widgets.
 - Optionally, Mermaid code that is already in your posts as code, such as a `language-mermaid` code block from a Markdown import, is shown as a diagram.
 - Light on your pages: a page with a diagram loads one small script, then Mermaid when a diagram scrolls into view, and of Mermaid only the parts that diagram needs. A page without a diagram loads nothing.
 - A choice of renderer: Mermaid.js, or Pele, which draws the same Mermaid code with less to download and faster.
@@ -106,13 +106,13 @@ A developer can register icon packs with the `graphdraw_icon_packs` filter, for 
 Then a diagram can use `fa:fa-car` in a label, an icon shape such as `A@{ icon: "fa:user" }`, and `(logos:aws)` in an architecture diagram. A pack's name has lower-case letters, digits and hyphens. A pack is fetched only on a page whose diagrams use one of its icons. Register only packs you trust: their markup goes into the page as it is. People who write diagrams can't add packs.
 
 ### Shortcode:
-Where the block can't be used, write the diagram between `[mermaid]` and `[/mermaid]`:
+Where the block can't be used, write the diagram between `[graphdraw]` and `[/graphdraw]`:
 
-    [mermaid caption="Checkout" zoom download]
+    [graphdraw caption="Checkout" zoom download]
     flowchart LR
     A[Cart] --> B{Paid?}
     B -->|Yes| C[Done]
-    [/mermaid]
+    [/graphdraw]
 
 Its attributes are the settings of the block:
 
@@ -121,8 +121,6 @@ Its attributes are the settings of the block:
 - `zoom` and `download`: zoom controls and download buttons for visitors. Write them without a value, or as `zoom="1"`.
 - `title` and `description`: what screen readers read for the diagram.
 - `align`: `center`, `wide` or `full`.
-
-If another plugin already uses `[mermaid]`, write `[graphdraw]` instead: it always belongs to this plugin.
 
 ### Mermaid code in posts:
 Content that came from Markdown often holds its diagrams as code. Switch on "Show code marked as Mermaid as diagrams" under Settings → GraphDraw, and visitors see that code as diagrams, without anyone converting it:
@@ -221,7 +219,7 @@ Without them, flowcharts and class, state, entity relationship and requirement d
 The Mermaid code of the diagram, since it is the browser that draws it. To show them a picture instead, switch on "Save an image of each diagram" under Settings → GraphDraw, then open your posts in the block editor, which makes the images.
 
 = Can I use it in the classic editor or a page builder? =
-In Elementor, add the Mermaid Diagram widget: it has the block's settings, and its preview shows the diagram as you edit it. Elsewhere, use the `[mermaid]` shortcode: put the Mermaid code between `[mermaid]` and `[/mermaid]`. If a page builder shows the code instead of the diagram, the code has a `<` that WordPress took for the start of a tag: write it as `&lt;`.
+In Elementor, add the Mermaid Diagram widget: it has the block's settings, and its preview shows the diagram as you edit it. Elsewhere, use the `[graphdraw]` shortcode: put the Mermaid code between `[graphdraw]` and `[/graphdraw]`. If a page builder shows the code instead of the diagram, the code has a `<` that WordPress took for the start of a tag: write it as `&lt;`.
 
 = My posts already have Mermaid code in code blocks. Do I have to convert them? =
 No. Switch on "Show code marked as Mermaid as diagrams" under Settings → GraphDraw. Code with the `language-mermaid` class is then shown as a diagram, and the posts stay as they are. The diagram replaces the code before the page is sent, so a script of another plugin that draws such code finds none: it is not drawn twice. To keep some code as code, return false from the `graphdraw_show_code_as_diagram` filter.
@@ -250,7 +248,7 @@ Ask in the plugin's support forum on WordPress.org. Report bugs and suggest feat
 * Controls for visitors: zoom, fullscreen, download as SVG or PNG, and copy the code.
 * The code field has line numbers, Tab indentation and the line of an error marked. Copy a diagram as PNG from the block's toolbar.
 * Saved images of diagrams, for feeds and browsers without JavaScript (off by default).
-* The `[mermaid]` shortcode, a Mermaid Diagram widget for Elementor, and code marked as Mermaid in posts shown as diagrams (off by default).
+* The `[graphdraw]` shortcode, a Mermaid Diagram widget for Elementor, and code marked as Mermaid in posts shown as diagrams (off by default).
 * Abilities for AI agents, with the WordPress Abilities API (WordPress 6.9 and later).
 * Lighter pages: Mermaid loads only when a diagram scrolls into view, and only the parts that diagram needs.
 

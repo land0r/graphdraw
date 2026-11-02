@@ -49,7 +49,6 @@ class ShortcodeTest extends WP_UnitTestCase {
 	 */
 	public function tear_down(): void {
 		remove_shortcode( Shortcode::TAG );
-		remove_shortcode( Shortcode::PREFIXED_TAG );
 		$this->shortcode->register();
 
 		parent::tear_down();
@@ -75,44 +74,28 @@ class ShortcodeTest extends WP_UnitTestCase {
 	 *
 	 * @param string $code       The code.
 	 * @param string $attributes The attributes, as written in the tag.
-	 * @param string $tag        The tag.
 	 *
 	 * @return string The shortcode.
 	 */
-	private function shortcode( string $code = self::CODE, string $attributes = '', string $tag = Shortcode::TAG ): string {
-		return sprintf( "[%1\$s%2\$s]\n%3\$s\n[/%1\$s]", $tag, '' === $attributes ? '' : ' ' . $attributes, $code );
+	private function shortcode( string $code = self::CODE, string $attributes = '' ): string {
+		return sprintf( "[%1\$s%2\$s]\n%3\$s\n[/%1\$s]", Shortcode::TAG, '' === $attributes ? '' : ' ' . $attributes, $code );
 	}
 
 	/**
-	 * Both tags run the shortcode.
+	 * The plugin's own tag runs the shortcode, and `mermaid`, a tag other
+	 * plugins use, is left to them.
 	 */
-	public function test_registers_both_tags(): void {
-		$this->assertTrue( shortcode_exists( 'mermaid' ) );
+	public function test_registers_its_tag(): void {
 		$this->assertTrue( shortcode_exists( 'graphdraw' ) );
-		$this->assertSame( array( 'mermaid', 'graphdraw' ), $this->shortcode->get_tags() );
-	}
-
-	/**
-	 * The tags.
-	 *
-	 * @return array[] The tags.
-	 */
-	public function data_tags(): array {
-		return array(
-			'short'    => array( 'mermaid' ),
-			'prefixed' => array( 'graphdraw' ),
-		);
+		$this->assertFalse( shortcode_exists( 'mermaid' ) );
+		$this->assertSame( array( 'graphdraw' ), $this->shortcode->get_tags() );
 	}
 
 	/**
 	 * The shortcode outputs the markup of a diagram, and loads what renders it.
-	 *
-	 * @dataProvider data_tags
-	 *
-	 * @param string $tag The tag.
 	 */
-	public function test_renders_a_diagram( string $tag ): void {
-		$markup = do_shortcode( $this->shortcode( self::CODE, '', $tag ) );
+	public function test_renders_a_diagram(): void {
+		$markup = do_shortcode( $this->shortcode() );
 
 		$this->assertStringStartsWith( '<div class="graphdraw-diagram" data-mermaid-theme="', $markup );
 		$this->assertSame( self::CODE, $this->get_source( $markup ) );
@@ -123,10 +106,10 @@ class ShortcodeTest extends WP_UnitTestCase {
 	/**
 	 * A shortcode without code outputs nothing, and loads nothing.
 	 *
-	 * @testWith ["[mermaid][/mermaid]"]
-	 *           ["[mermaid]\n\n[/mermaid]"]
-	 *           ["[mermaid]"]
-	 *           ["[mermaid /]"]
+	 * @testWith ["[graphdraw][/graphdraw]"]
+	 *           ["[graphdraw]\n\n[/graphdraw]"]
+	 *           ["[graphdraw]"]
+	 *           ["[graphdraw /]"]
 	 *
 	 * @param string $shortcode The shortcode.
 	 */
@@ -224,12 +207,12 @@ class ShortcodeTest extends WP_UnitTestCase {
 	public function test_protects_only_its_own_code(): void {
 		add_shortcode( 'graphdraw_test', '__return_empty_string' );
 
-		$other = "<p>1 < 2</p>\n[graphdraw_test]a < b[/graphdraw_test]\n[[mermaid]a < b[/mermaid]]\n[mermaid /]";
+		$other = "<p>1 < 2</p>\n[graphdraw_test]a < b[/graphdraw_test]\n[mermaid]a < b[/mermaid]\n[[graphdraw]a < b[/graphdraw]]\n[graphdraw /]";
 
 		$this->assertSame( $other, $this->shortcode->protect_code( $other ) );
 		$this->assertSame(
-			$other . "\n[mermaid zoom]a &lt;--&gt; b[/mermaid]\n[graphdraw]c &lt; d[/graphdraw]",
-			$this->shortcode->protect_code( $other . "\n[mermaid zoom]a <--> b[/mermaid]\n[graphdraw]c < d[/graphdraw]" )
+			$other . "\n[graphdraw zoom]a &lt;--&gt; b[/graphdraw]\n[graphdraw]c &lt; d[/graphdraw]",
+			$this->shortcode->protect_code( $other . "\n[graphdraw zoom]a <--> b[/graphdraw]\n[graphdraw]c < d[/graphdraw]" )
 		);
 		$this->assertNull( $this->shortcode->protect_code( null ) );
 
@@ -240,9 +223,9 @@ class ShortcodeTest extends WP_UnitTestCase {
 	 * The code of a tag another plugin has is left alone.
 	 */
 	public function test_protects_no_code_of_a_taken_tag(): void {
-		add_shortcode( 'mermaid', '__return_empty_string' );
+		add_shortcode( 'graphdraw', '__return_empty_string' );
 
-		$content = '[mermaid]a < b[/mermaid]';
+		$content = '[graphdraw]a < b[/graphdraw]';
 
 		$this->assertSame( $content, $this->shortcode->protect_code( $content ) );
 	}
@@ -400,37 +383,23 @@ class ShortcodeTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * The code of both tags is kept away from wptexturize().
+	 * The code is kept away from wptexturize().
 	 */
 	public function test_keeps_wptexturize_away(): void {
 		$tags = apply_filters( 'no_texturize_shortcodes', array( 'code' ) );
 
-		$this->assertSame( array( 'code', 'mermaid', 'graphdraw' ), $tags );
+		$this->assertSame( array( 'code', 'graphdraw' ), $tags );
 	}
 
 	/**
-	 * A plugin that has the short tag keeps it, and how its content is
-	 * treated. The prefixed tag still works.
-	 */
-	public function test_leaves_a_taken_tag_alone(): void {
-		remove_shortcode( 'mermaid' );
-		remove_shortcode( 'graphdraw' );
-		add_shortcode( 'mermaid', '__return_empty_string' );
-
-		$this->shortcode->register();
-
-		$this->assertSame( '', do_shortcode( $this->shortcode() ) );
-		$this->assertSame( self::CODE, $this->get_source( do_shortcode( $this->shortcode( self::CODE, '', 'graphdraw' ) ) ) );
-		$this->assertSame( array( 'graphdraw' ), $this->shortcode->get_tags() );
-		$this->assertSame( array( 'graphdraw' ), apply_filters( 'no_texturize_shortcodes', array() ) );
-	}
-
-	/**
-	 * The same when a plugin takes the short tag over later.
+	 * A plugin that takes the tag over later gets it, and how its content is
+	 * treated.
 	 */
 	public function test_notices_a_tag_taken_later(): void {
-		add_shortcode( 'mermaid', '__return_empty_string' );
+		add_shortcode( 'graphdraw', '__return_empty_string' );
 
-		$this->assertSame( array( 'graphdraw' ), $this->shortcode->get_tags() );
+		$this->assertSame( '', do_shortcode( $this->shortcode() ) );
+		$this->assertSame( array(), $this->shortcode->get_tags() );
+		$this->assertSame( array(), apply_filters( 'no_texturize_shortcodes', array() ) );
 	}
 }
