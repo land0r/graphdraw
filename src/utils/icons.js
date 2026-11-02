@@ -59,18 +59,99 @@ function findIcon( pack, icon ) {
 	return null;
 }
 
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const XLINK_NS = 'http://www.w3.org/1999/xlink';
+
+// What can run code in an SVG: these elements, with what they hold.
+const UNSAFE_ELEMENTS = [
+	'script',
+	'foreignobject',
+	'iframe',
+	'embed',
+	'object',
+];
+
+// What an animation may not change: a link, or an event handler.
+const UNSAFE_TARGET = /^(?:(?:xlink:)?href|on.*)$/i;
+
+// The links an icon may have: to one of its own parts, or to an image's data.
+const SAFE_LINK = /^\s*(?:#|data:image\/)/i;
+
+/**
+ * Removes from the markup of an icon what can run code, and keeps the drawing.
+ *
+ * A pack is a file a site fetches from elsewhere, so its markup is not
+ * trusted: scripts, HTML, event handlers, links that aren't to a part of the
+ * icon and animations that set links or handlers are dropped. Real icons have
+ * none of them, so they come out as they are. Mermaid.js cleans the icons it
+ * draws itself, with DOMPurify.
+ *
+ * @param {string} body The markup of the icon, without its SVG element.
+ *
+ * @return {?string} The markup, without what can run code, or null when it is
+ * not XML, as Iconify's markup always is.
+ */
+function cleanBody( body ) {
+	// An inert document: nothing in it loads or runs.
+	const doc = new window.DOMParser().parseFromString(
+		`<svg xmlns="${ SVG_NS }" xmlns:xlink="${ XLINK_NS }">${ body }</svg>`,
+		'image/svg+xml'
+	);
+	const svg = doc.documentElement;
+
+	if ( svg.localName !== 'svg' || doc.querySelector( 'parsererror' ) ) {
+		return null;
+	}
+
+	for ( const element of [ ...svg.querySelectorAll( '*' ) ] ) {
+		const name = element.localName.toLowerCase();
+		const isAnimation = name === 'set' || name.startsWith( 'animate' );
+
+		if (
+			UNSAFE_ELEMENTS.includes( name ) ||
+			( isAnimation &&
+				UNSAFE_TARGET.test( element.getAttribute( 'attributeName' ) ) )
+		) {
+			element.remove();
+			continue;
+		}
+
+		for ( const { name: attribute, value } of [ ...element.attributes ] ) {
+			const isLink = /^(?:xlink:)?href$/i.test( attribute );
+
+			if (
+				/^on/i.test( attribute ) ||
+				( isLink && ! SAFE_LINK.test( value ) )
+			) {
+				element.removeAttribute( attribute );
+			}
+		}
+	}
+
+	// The children, as XML: an empty icon serializes as `<svg …/>`.
+	return new window.XMLSerializer()
+		.serializeToString( svg )
+		.replace( /^<svg[^>]*?(?:\/>|>)/, '' )
+		.replace( /<\/svg>$/, '' );
+}
+
+// The cleaned markup of each icon drawn on this page, by its markup.
+const cleaned = new Map();
+
 /**
  * Builds the SVG of an icon from the Iconify JSON of its pack.
  *
  * The box is the icon's `left`, `top`, `width` and `height`, each from the
  * icon, else the pack, else 16 (0 for `left` and `top`). The SVG fills the
  * box it is put in, in the colour of the text around it unless the icon
- * paints itself, like a logo.
+ * paints itself, like a logo. The icon's markup is cleaned first
+ * (`cleanBody()`), once per page.
  *
  * @param {?Object} pack The Iconify JSON of the pack.
  * @param {string}  icon The name of the icon in the pack.
  *
- * @return {?string} The SVG markup, or null when the pack has no such icon.
+ * @return {?string} The SVG markup, or null when the pack has no such icon,
+ * or its markup is not XML.
  */
 export function getIconSvg( pack, icon ) {
 	const data =
@@ -92,7 +173,15 @@ export function getIconSvg( pack, icon ) {
 		get( 'height', 16 ),
 	].join( ' ' );
 
-	return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${ box }" width="100%" height="100%" fill="currentColor" stroke="none">${ data.body }</svg>`;
+	if ( ! cleaned.has( data.body ) ) {
+		cleaned.set( data.body, cleanBody( data.body ) );
+	}
+
+	const body = cleaned.get( data.body );
+
+	return body === null
+		? null
+		: `<svg xmlns="${ SVG_NS }" viewBox="${ box }" width="100%" height="100%" fill="currentColor" stroke="none">${ body }</svg>`;
 }
 
 // The packs fetched on this page, by URL: a promise of the Iconify JSON, or of
