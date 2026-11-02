@@ -166,7 +166,7 @@ Page builder previews are iframes, like the block editor canvas: load the assets
 ## Conventions
 
 - WordPress coding standards throughout. The linters are the source of truth.
-- Every user-facing string is translatable with the `graphdraw` text domain. ESLint and PHPCS enforce it.
+- Every user-facing string is translatable with the `graphdraw-mermaid-diagrams-flowcharts` text domain, the plugin's slug. ESLint and PHPCS enforce it.
 - PHP code lives in classes in `includes/`. A class that adds hooks implements `Hookable`, adds them in `hooks()`, never in its constructor, and is in one of the lists of `Plugin`. A class gets the other objects it needs through its constructor, as parameters typed with their class: the container creates them, and nothing is created with `new` but values.
 - JavaScript unit tests live next to the code they cover, in `test/` directories. PHP tests live in `tests/`, one class per class under test, extending `WP_UnitTestCase`.
 - A new ability is a class in `includes/Abilities/` extending `Ability`, `DiagramAbility` when it works on diagrams, or `PostAbility` when it works on a diagram of one post, and a line in `Registrar::ABILITIES`.
