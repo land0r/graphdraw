@@ -28,7 +28,6 @@ This makes it easy to include **text-based diagrams** in the block editor withou
 - Alignment (centre, wide and full width), spacing, and an optional caption.
 - A title and a description of each diagram for screen readers.
 - Optionally, a saved image of each diagram, for feeds and for browsers that run no JavaScript, which otherwise show its Mermaid code.
-- Simple and intuitive integration with the block editor.
 - A Mermaid Diagram widget for Elementor, with the block's settings and a live preview.
 - A `[mermaid]` shortcode for the classic editor, page builders and text widgets.
 - Optionally, Mermaid code that is already in your posts as code, such as a `language-mermaid` code block from a Markdown import, is shown as a diagram.
@@ -159,7 +158,7 @@ A diagram is drawn in the visitor's browser, so a feed reader, or a browser that
 The diagrams of synced patterns, template parts, widgets and shortcodes get no image.
 
 ### Libraries:
-The diagrams are drawn by [Mermaid](https://mermaid.js.org/), by the Mermaid project (MIT licence), or by [Pele](https://pele.run/), by Obsidian (MIT licence). With Pele, formulas are typeset by [Temml](https://temml.org/), by Ron Kok (MIT licence). For a diagram that asks for the ELK layout, Mermaid uses [ELK](https://eclipse.dev/elk/), by the Eclipse Foundation, as elkjs (Eclipse Public License 2.0, which allows the GPL as a secondary licence). All four are included in the plugin.
+The diagrams are drawn by [Mermaid](https://mermaid.js.org/), by the Mermaid project (MIT licence), or by [Pele](https://pele.run/), by Obsidian (MIT licence). With Pele, formulas are typeset by [Temml](https://temml.org/), by Ron Kok (MIT licence). For a diagram that asks for the ELK layout, Mermaid uses [ELK](https://eclipse.dev/elk/), by the Eclipse Foundation, as elkjs (Eclipse Public License 2.0, which allows the GPL as a secondary licence). All four are included in the plugin. Mermaid's files also include the libraries Mermaid is built with, such as KaTeX, DOMPurify, D3, dagre and Cytoscape.js, under the MIT, ISC, Apache 2.0 and similar licences.
 
 ### Source code:
 The JavaScript in the plugin's `build/` folder is compiled. Its source, with the build scripts, is on GitHub: [land0r/graphdraw](https://github.com/land0r/graphdraw). Run `npm ci && composer install && npm run build` there to build it.
@@ -172,7 +171,7 @@ Icon packs are the one exception, and only when a site adds them. A pack registe
 
 == Installation ==
 
-1. Upload the plugin to the `/wp-content/plugins/graphdraw` directory, or install it through the WordPress plugin screen.
+1. Install the plugin through Plugins → Add New, or upload its folder to `/wp-content/plugins/graphdraw-mermaid-diagrams-flowcharts/`.
 2. Activate the plugin through the 'Plugins' menu.
 3. Add the **Mermaid Diagram** block in the block editor.
 4. Write Mermaid code and preview your diagram instantly.
@@ -180,7 +179,7 @@ Icon packs are the one exception, and only when a site adds them. A pack registe
 == Frequently Asked Questions ==
 
 = What types of diagrams are supported? =
-Every type of the Mermaid version the plugin has, Mermaid 12.2: flowcharts, sequence, class, state, entity relationship, user journey, Gantt, pie, quadrant, requirement, C4, Sankey, XY, block, packet, kanban, architecture, radar and treemap diagrams, mind maps, timelines and Git graphs among them. Pele draws them all too.
+Every type of the Mermaid version the plugin has, Mermaid 12.2: flowcharts, sequence, class, state, entity relationship, user journey, Gantt, pie, quadrant, requirement, C4, Sankey, XY, block, packet, kanban, architecture, radar, treemap, use case, agent flow, swimlane, event modeling, Ishikawa, Venn, Cynefin, railroad and tree view diagrams, mind maps, timelines, Wardley maps and Git graphs. Pele draws them all too.
 
 = Can I edit Mermaid code? =
 Yes, you can edit Mermaid code directly in the block editor using plain text.
@@ -232,10 +231,12 @@ Ask in the plugin's support forum on WordPress.org. Report bugs and suggest feat
 
 == Screenshots ==
 
-1. **Adding a diagram block** – Inserting a Mermaid Diagram block in the block editor.
-2. **Example: Flowchart** – A rendered flowchart in the block editor.
-3. **Example: Sequence Diagram** – A sequence diagram rendered live.
-4. **Frontend View** – A Mermaid diagram displayed on the published site.
+1. A Mermaid Diagram block in the editor: the live preview, the code field with line numbers, and the block's theme, visitor controls and accessible text in the sidebar.
+2. The published page: a wide flowchart with a caption and the visitor controls (zoom, download as SVG or PNG, copy the code, fullscreen), and a sequence diagram.
+3. A Gantt chart and a mind map, two of the more than 30 diagram types.
+4. The same page drawn by Pele, the lighter renderer, with its own zoom.
+5. A syntax error: the message in place of the preview, and the line marked in the code.
+6. Settings → GraphDraw: the renderer, the site's theme, and the optional features.
 
 == Changelog ==
 
