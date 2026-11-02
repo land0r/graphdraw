@@ -512,6 +512,7 @@ describe( 'icon packs', () => {
 		await expect(
 			mermaid.registerIconPacks.mock.calls[ 0 ][ 0 ][ 0 ].loader()
 		).rejects.toThrow();
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'registers the packs once per Mermaid, however many renderers', () => {

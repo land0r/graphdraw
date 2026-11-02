@@ -421,6 +421,7 @@ describe( 'addControls', () => {
 		button( diagram, 'Download as PNG' ).click();
 
 		expect( status.textContent ).toBe( '' );
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'puts the controls in one order, whatever order they are asked in', () => {
@@ -480,6 +481,7 @@ describe( 'addControls', () => {
 			).toBe( 'The code could not be copied.' );
 			// eslint-disable-next-line no-console
 			expect( console.error ).toHaveBeenCalled();
+			expect( console ).toHaveErrored();
 		} );
 
 		it( 'is left out where the page has no clipboard', () => {
@@ -519,6 +521,7 @@ describe( 'addControls', () => {
 			expect(
 				diagram.querySelector( '[role="status"]' ).textContent
 			).toBe( 'Copied.' );
+			expect( console ).toHaveErrored();
 		} );
 	} );
 

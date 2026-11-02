@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import * as pele from 'pele/lazy';
 
 import { createFullLayout, withFullLayout } from '../full-layout';

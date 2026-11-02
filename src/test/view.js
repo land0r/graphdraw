@@ -22,6 +22,7 @@ jest.mock( '../frontend/load-controls', () => ( {
 } ) );
 
 const fakeMermaid = () => ( {
+	initialize: jest.fn(),
 	render: jest.fn( async () => ( {
 		svg: '<svg viewBox="0 0 100 50"></svg>',
 	} ) ),
@@ -223,6 +224,7 @@ describe( 'view script', () => {
 		expect( diagram.querySelector( 'button' ) ).toBeNull();
 		// eslint-disable-next-line no-console
 		expect( console.error ).toHaveBeenCalled();
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'adds no controls to a diagram that failed', async () => {
@@ -239,6 +241,7 @@ describe( 'view script', () => {
 		expect( diagram.classList.contains( 'has-error' ) ).toBe( true );
 		expect( diagram.querySelector( 'button' ) ).toBeNull();
 		expect( mockLoadControls ).not.toHaveBeenCalled();
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'draws a diagram that follows the page again when the page turns dark', async () => {
@@ -359,6 +362,7 @@ describe( 'view script', () => {
 		expect( diagram.classList.contains( 'is-pending' ) ).toBe( false );
 		// eslint-disable-next-line no-console
 		expect( console.error ).toHaveBeenCalled();
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'warns and leaves diagrams alone without the URL of Mermaid', async () => {
@@ -375,5 +379,6 @@ describe( 'view script', () => {
 			false
 		);
 		expect( mockLoadMermaid ).not.toHaveBeenCalled();
+		expect( console ).toHaveWarned();
 	} );
 } );

@@ -30,8 +30,8 @@
 		"LICENSE.txt"
 	],
 	"devDependencies": {
-		"@wordpress/scripts": "^30.7.0",
-		"copy-webpack-plugin": "^10.2.4",
+		"@wordpress/scripts": "^34.2.0",
+		"copy-webpack-plugin": "^14.0.0",
 		"husky": "^9.1.7"
 	},
 	"dependencies": {

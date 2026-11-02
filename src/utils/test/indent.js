@@ -32,7 +32,7 @@ function press( marked, outdent = false ) {
 				mark( result, edit.selectionEnd, ']' ),
 				edit.selectionStart,
 				'['
-		  );
+			);
 }
 
 const tab = ( marked ) => press( marked );
