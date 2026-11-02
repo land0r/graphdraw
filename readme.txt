@@ -180,7 +180,7 @@ Icon packs are the one exception, and only when a site adds them. A pack registe
 == Frequently Asked Questions ==
 
 = What types of diagrams are supported? =
-Every type of the Mermaid version the plugin has, Mermaid 12.1: flowcharts, sequence, class, state, entity relationship, user journey, Gantt, pie, quadrant, requirement, C4, Sankey, XY, block, packet, kanban, architecture, radar and treemap diagrams, mind maps, timelines and Git graphs among them. Pele draws them all too.
+Every type of the Mermaid version the plugin has, Mermaid 12.2: flowcharts, sequence, class, state, entity relationship, user journey, Gantt, pie, quadrant, requirement, C4, Sankey, XY, block, packet, kanban, architecture, radar and treemap diagrams, mind maps, timelines and Git graphs among them. Pele draws them all too.
 
 = Can I edit Mermaid code? =
 Yes, you can edit Mermaid code directly in the block editor using plain text.
@@ -241,7 +241,7 @@ Ask in the plugin's support forum on WordPress.org. Report bugs and suggest feat
 
 = 1.0.0 =
 * First release on WordPress.org, as GraphDraw.
-* Mermaid 12.1, with every diagram type it has.
+* Mermaid 12.2, with every diagram type it has.
 * A choice of renderer: Mermaid.js, or Pele, which draws the same code with much less JavaScript. With Pele: formulas, layouts for narrow screens, its own zoom, and options a site sets.
 * Icons in diagrams, from icon packs a site registers.
 * Themes: one for the site and one per diagram, and an automatic theme that follows the page, dark mode included.
