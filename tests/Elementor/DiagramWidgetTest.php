@@ -258,7 +258,7 @@ class DiagramWidgetTest extends WP_UnitTestCase {
 					'align'       => 'center',
 				),
 				esc_html( self::CODE ),
-				Shortcode::PREFIXED_TAG
+				Shortcode::TAG
 			),
 			$markup
 		);
