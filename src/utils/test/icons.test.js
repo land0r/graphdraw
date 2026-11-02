@@ -78,6 +78,66 @@ describe( 'getIconSvg()', () => {
 		expect( getIconSvg( { icons: 'x' }, 'car' ) ).toBeNull();
 		expect( getIconSvg( { icons: { a: {} } }, 'a' ) ).toBeNull();
 	} );
+
+	const body = ( markup ) =>
+		getIconSvg( { icons: { a: { body: markup } } }, 'a' )
+			.replace( /^<svg[^>]*>/, '' )
+			.replace( /<\/svg>$/, '' );
+
+	it( 'keeps the drawing of real icons as it is', () => {
+		// Font Awesome's car, a gradient logo and an animated spinner, as Iconify has them.
+		const icons = [
+			'<path fill="currentColor" d="M135.2 117.4L109.1 192h293.8l-26.1-74.6C372.3 104.6 360.2 96 346.6 96H165.4c-13.6 0-25.7 8.6-30.2 21.4z"/>',
+			'<defs><linearGradient id="a" x1="0%" x2="100%"><stop offset="0%" stop-color="#41D1FF"/><stop offset="100%" stop-color="#BD34FE"/></linearGradient></defs><path fill="url(#a)" d="M255.2 37.3L134.8 252.9"/><use href="#a"/><use xlink:href="#a"/>',
+			'<circle cx="12" cy="12" r="0"><animate attributeName="r" dur="1.2s" repeatCount="indefinite" values="0;11"/></circle>',
+			'<image href="data:image/png;base64,iVBORw0KGgo=" width="16" height="16"/>',
+		];
+
+		for ( const icon of icons ) {
+			expect( body( icon ) ).toBe( icon );
+		}
+	} );
+
+	it.each( [
+		[ 'a script', '<path d="M0 0"/><script>alert(1)</script>' ],
+		[
+			'HTML in a foreignObject',
+			'<path d="M0 0"/><foreignObject><img xmlns="http://www.w3.org/1999/xhtml" src="x" onerror="alert(1)"/></foreignObject>',
+		],
+		[
+			'an event handler',
+			'<path d="M0 0" onload="alert(1)" onClick="alert(1)"/>',
+		],
+		[
+			'a javascript: link',
+			'<a href="javascript:alert(1)"><path d="M0 0"/></a>',
+		],
+		[
+			'an xlink:href to elsewhere',
+			'<use xlink:href="https://example.com/x.svg#a"/><path d="M0 0"/>',
+		],
+		[
+			'an animation that sets a link',
+			'<a><set attributeName="href" to="javascript:alert(1)"/><path d="M0 0"/></a>',
+		],
+		[
+			'an animation that sets a handler',
+			'<path d="M0 0"/><animate attributeName="onbegin" values="alert(1)"/>',
+		],
+	] )( 'removes %s', ( name, markup ) => {
+		const cleaned = body( markup );
+
+		expect( cleaned ).toContain( '<path d="M0 0"/>' );
+		expect( cleaned ).not.toMatch(
+			/script|foreignObject|onload|onclick|onerror|javascript:|example\.com|<set|<animate/i
+		);
+	} );
+
+	it( 'returns null for markup that is not XML', () => {
+		expect(
+			getIconSvg( { icons: { a: { body: '<path d="M0 0">' } } }, 'a' )
+		).toBeNull();
+	} );
 } );
 
 describe( 'createIcons()', () => {

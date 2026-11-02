@@ -103,7 +103,7 @@ A developer can register icon packs with the `graphdraw_icon_packs` filter, for 
         return $packs;
     } );
 
-Then a diagram can use `fa:fa-car` in a label, an icon shape such as `A@{ icon: "fa:user" }`, and `(logos:aws)` in an architecture diagram. A pack's name has lower-case letters, digits and hyphens. A pack is fetched only on a page whose diagrams use one of its icons. Register only packs you trust: their markup goes into the page as it is. People who write diagrams can't add packs.
+Then a diagram can use `fa:fa-car` in a label, an icon shape such as `A@{ icon: "fa:user" }`, and `(logos:aws)` in an architecture diagram. A pack's name has lower-case letters, digits and hyphens. A pack is fetched only on a page whose diagrams use one of its icons. Icons are drawn as shapes only: scripts, event handlers and outside links in a pack's markup are removed before it reaches the page. People who write diagrams can't add packs.
 
 ### Shortcode:
 Where the block can't be used, write the diagram between `[graphdraw]` and `[/graphdraw]`:
