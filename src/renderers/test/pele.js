@@ -1,7 +1,6 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-// eslint-disable-next-line import/no-unresolved
 import * as pele from 'pele/lazy';
 
 import { createPeleRenderer } from '../pele';

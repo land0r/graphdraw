@@ -45,7 +45,7 @@ function drawColor( value, doc ) {
 		).data;
 
 		return { red, green, blue, alpha: alpha / 255 };
-	} catch ( error ) {
+	} catch {
 		return null;
 	}
 }

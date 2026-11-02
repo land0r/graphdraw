@@ -225,7 +225,6 @@ export default function watchPost() {
 		 * By name: importing the store would make the block's script depend on
 		 * the post editor, which the widgets editor must not load.
 		 */
-		// eslint-disable-next-line @wordpress/data-no-store-string-literals
 		const editor = select( 'core/editor' );
 
 		if ( ! editor ) {

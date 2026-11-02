@@ -391,14 +391,14 @@ function saveFile( blob, name ) {
 export async function downloadDiagram(
 	svg,
 	format,
-	full = ( use ) => use( svg )
+	full = ( make ) => make( svg )
 ) {
 	const blob = await full( ( source ) =>
 		format === 'png'
 			? getPngBlob( source )
 			: new window.Blob( [ getSvgMarkup( source ) ], {
 					type: 'image/svg+xml;charset=utf-8',
-			  } )
+				} )
 	);
 
 	saveFile( blob, `${ FILE_NAME }.${ format }` );
@@ -435,7 +435,7 @@ export function canCopyImage( view = window ) {
  * @return {Promise<void>} Resolves once the image is on the clipboard. Rejects
  * when the PNG could not be created or the browser refused to copy it.
  */
-export function copyDiagram( svg, full = ( use ) => use( svg ) ) {
+export function copyDiagram( svg, full = ( make ) => make( svg ) ) {
 	return window.navigator.clipboard.write( [
 		new window.ClipboardItem( { 'image/png': full( getPngBlob ) } ),
 	] );

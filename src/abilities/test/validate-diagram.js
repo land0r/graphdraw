@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import * as pele from 'pele/lazy';
 
 import { validateDiagram } from '../validate-diagram';

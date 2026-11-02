@@ -46,12 +46,12 @@ export default function loadRenderer( settings ) {
 							iconPacks: settings.iconPacks,
 							loadMath: () => loadMath( getMathUrl( settings ) ),
 						} )
-				  )
+					)
 				: loadMermaid( mermaidUrl ).then( ( mermaid ) =>
 						createMermaidRenderer( mermaid, {
 							iconPacks: settings.iconPacks,
 						} )
-				  );
+					);
 	}
 
 	return loading;

@@ -41,7 +41,7 @@ function getData() {
 
 	try {
 		return JSON.parse( element?.textContent || '{}' );
-	} catch ( error ) {
+	} catch {
 		return {};
 	}
 }

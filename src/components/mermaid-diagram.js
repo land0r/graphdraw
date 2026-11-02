@@ -226,7 +226,7 @@ export default function MermaidDiagram( {
 							'graphdraw-mermaid-diagrams-flowcharts'
 						),
 						error.line
-				  );
+					);
 	}
 
 	return (

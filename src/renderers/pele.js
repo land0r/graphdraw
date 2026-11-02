@@ -119,7 +119,7 @@ async function loadType( pele, code ) {
 
 	try {
 		type = pele.detectType( code );
-	} catch ( error ) {
+	} catch {
 		// An error is reported by render().
 	}
 

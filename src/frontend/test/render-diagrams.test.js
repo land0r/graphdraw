@@ -3,7 +3,6 @@ import renderDraw, {
 	redrawDiagram as redrawWith,
 	redrawInPlace,
 } from '../render-diagrams';
-// eslint-disable-next-line import/no-unresolved
 import * as pele from 'pele/lazy';
 import { createMermaidRenderer } from '../../renderers/mermaid';
 import { createPeleRenderer } from '../../renderers/pele';
@@ -125,6 +124,7 @@ describe( 'renderDiagrams', () => {
 		expect( document.getElementById( 'd' + badId ) ).toBeNull();
 		// eslint-disable-next-line no-console
 		expect( console.error ).toHaveBeenCalled();
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'logs the line the error points at', async () => {
@@ -143,6 +143,7 @@ describe( 'renderDiagrams', () => {
 			'GraphDraw: failed to render diagram.',
 			'Line 2: boom'
 		);
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'does not render twice', async () => {
@@ -156,6 +157,7 @@ describe( 'renderDiagrams', () => {
 		await renderDiagrams( m );
 		await renderDiagrams( m );
 		expect( m.render ).toHaveBeenCalledTimes( 2 );
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'renders only the diagrams inside the given root', async () => {
@@ -362,6 +364,7 @@ describe( 'redrawDiagram', () => {
 		expect( diagram.className ).toBe( 'graphdraw-diagram is-rendered' );
 		// eslint-disable-next-line no-console
 		expect( console.error ).toHaveBeenCalled();
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'leaves alone a diagram that has not rendered', async () => {
@@ -467,6 +470,7 @@ describe( 'renderDiagrams with Pele', () => {
 			'GraphDraw: failed to render diagram.',
 			expect.stringMatching( /^Line 3: / )
 		);
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'draws a diagram that follows a dark surface in the dark palette', async () => {

@@ -35,7 +35,6 @@ jest.mock(
 );
 
 import { act, createRoot } from '@wordpress/element';
-// eslint-disable-next-line import/no-unresolved
 import * as pele from 'pele/lazy';
 
 import MermaidDiagram from '../mermaid-diagram';

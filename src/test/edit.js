@@ -31,7 +31,6 @@ jest.mock(
 			useInstanceId: ( component, prefix ) => `${ prefix }-1`,
 			// Waits as the real one does, on the timers of the test.
 			useDebounce: ( callback, wait ) =>
-				// eslint-disable-next-line react-hooks/rules-of-hooks
 				useMemo( () => {
 					let timer;
 
@@ -145,7 +144,7 @@ jest.mock( '../components/mermaid-diagram', () => {
 						'div',
 						{ className: 'mermaid-container__diagram' },
 						h( 'svg' )
-				  )
+					)
 				: null
 		);
 	};

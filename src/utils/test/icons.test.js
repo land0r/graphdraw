@@ -151,6 +151,7 @@ describe( 'createIcons()', () => {
 		expect( global.fetch ).toHaveBeenCalledTimes( 1 );
 		// eslint-disable-next-line no-console
 		expect( console.error ).toHaveBeenCalledTimes( 1 );
+		expect( console ).toHaveErrored();
 	} );
 
 	it( 'treats a fetch that rejects, or a file that is no JSON, as a failure', async () => {
@@ -162,5 +163,6 @@ describe( 'createIcons()', () => {
 		await expect( icons.load( [ 'fa:fa-car' ] ) ).resolves.toBeUndefined();
 
 		expect( icons.get( 'fa:fa-car' ) ).toBeNull();
+		expect( console ).toHaveErrored();
 	} );
 } );

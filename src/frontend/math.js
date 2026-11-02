@@ -59,7 +59,7 @@ export function typeset( tex, size, doc ) {
 			displayMode: true,
 			throwOnError: true,
 		} );
-	} catch ( error ) {
+	} catch {
 		return null;
 	}
 

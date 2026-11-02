@@ -186,7 +186,7 @@ const observer =
 					} );
 				},
 				{ rootMargin: ROOT_MARGIN }
-		  )
+			)
 		: null;
 
 /**

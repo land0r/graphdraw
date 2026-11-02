@@ -260,6 +260,7 @@ describe( 'drawImage', () => {
 			'boom'
 		);
 		expect( getPngBlob ).not.toHaveBeenCalled();
+		expect( console ).toHaveWarned();
 	} );
 } );
 
@@ -320,6 +321,7 @@ describe( 'saveImages', () => {
 			LIST,
 			`${ PATH }/${ 'b'.repeat( 32 ) }${ QUERY }`,
 		] );
+		expect( console ).toHaveWarned();
 	} );
 
 	it( 'draws with the Mermaid of the editor canvas, once that has loaded', async () => {
