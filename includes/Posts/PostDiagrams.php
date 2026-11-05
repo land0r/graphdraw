@@ -280,7 +280,7 @@ final class PostDiagrams {
 		if ( ! hash_equals( $this->get_hash( $diagrams[ $index ] ), $hash ) ) {
 			return new WP_Error(
 				'graphdraw_diagram_changed',
-				__( 'The diagram changed since it was read. Read it again, and base the change on what it is now.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'The diagram changed since it was read. Read it again, and base the change on what it is now.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 409 )
 			);
 		}
@@ -312,7 +312,7 @@ final class PostDiagrams {
 			'graphdraw_diagram_not_found',
 			sprintf(
 				/* translators: %d: The index of a diagram in a post, counting from 0. */
-				__( 'The post has no diagram at index %d.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'The post has no diagram at index %d.', 'graphdraw-flowcharts-for-mermaid' ),
 				$index
 			),
 			array( 'status' => 404 )

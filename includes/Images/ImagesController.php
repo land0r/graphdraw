@@ -88,14 +88,14 @@ final class ImagesController implements Hookable {
 		}
 
 		$post_id = array(
-			'description' => __( 'The ID of the post.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			'description' => __( 'The ID of the post.', 'graphdraw-flowcharts-for-mermaid' ),
 			'type'        => 'integer',
 			'required'    => true,
 		);
 
 		// The editor says which renderer it draws with: a filter may give the request another one.
 		$renderer = array(
-			'description' => __( 'The renderer the images are drawn with. Default: the one of the request.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			'description' => __( 'The renderer the images are drawn with. Default: the one of the request.', 'graphdraw-flowcharts-for-mermaid' ),
 			'type'        => 'string',
 			'enum'        => Renderers::ALL,
 		);
@@ -125,7 +125,7 @@ final class ImagesController implements Hookable {
 					'id'       => $post_id,
 					'renderer' => $renderer,
 					'key'      => array(
-						'description' => __( 'The key of the diagram, as the list of diagrams to draw gives it.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+						'description' => __( 'The key of the diagram, as the list of diagrams to draw gives it.', 'graphdraw-flowcharts-for-mermaid' ),
 						'type'        => 'string',
 						'required'    => true,
 					),
@@ -153,7 +153,7 @@ final class ImagesController implements Hookable {
 		if ( ! current_user_can( 'edit_post', $post->ID ) ) {
 			return new WP_Error(
 				'graphdraw_cannot_edit_post',
-				__( 'You are not allowed to edit this post.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'You are not allowed to edit this post.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => rest_authorization_required_code() )
 			);
 		}
@@ -195,7 +195,7 @@ final class ImagesController implements Hookable {
 		if ( ! isset( $diagrams[ $key ] ) ) {
 			return new WP_Error(
 				'graphdraw_image_not_wanted',
-				__( 'The post has no diagram this image is of. The post may have changed in the meantime.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'The post has no diagram this image is of. The post may have changed in the meantime.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 409 )
 			);
 		}

@@ -95,8 +95,8 @@ final class ClientAbilities implements Hookable {
 				'category'  => array( 'slug' => Registrar::CATEGORY ) + $this->registrar->get_category_args(),
 				'abilities' => array(
 					'validateDiagram' => array(
-						'label'       => __( 'Validate a diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-						'description' => __( 'Parses Mermaid source with the renderer of the editor, Mermaid.js or Pele as the site is set, and tells whether the site can draw it: its type, or the error and the line it is on. Changes nothing.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+						'label'       => __( 'Validate a diagram', 'graphdraw-flowcharts-for-mermaid' ),
+						'description' => __( 'Parses Mermaid source with the renderer of the editor, Mermaid.js or Pele as the site is set, and tells whether the site can draw it: its type, or the error and the line it is on. Changes nothing.', 'graphdraw-flowcharts-for-mermaid' ),
 					),
 				),
 			)

@@ -58,7 +58,7 @@ final class EditablePosts {
 		if ( ! $post ) {
 			return new WP_Error(
 				'graphdraw_post_not_found',
-				__( 'There is no post with this ID.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'There is no post with this ID.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -84,7 +84,7 @@ final class EditablePosts {
 		if ( ! in_array( $post->post_type, $this->get_types(), true ) ) {
 			return new WP_Error(
 				'graphdraw_invalid_post_type',
-				__( 'Posts of this type are not edited in the block editor, so they hold no diagrams.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'Posts of this type are not edited in the block editor, so they hold no diagrams.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -93,7 +93,7 @@ final class EditablePosts {
 		if ( 'trash' === $post->post_status ) {
 			return new WP_Error(
 				'graphdraw_post_in_trash',
-				__( 'The post is in the trash. Restore it first.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'The post is in the trash. Restore it first.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 410 )
 			);
 		}

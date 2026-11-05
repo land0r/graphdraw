@@ -132,14 +132,14 @@ final class SettingsPage implements Hookable {
 
 		add_settings_section(
 			self::SECTION,
-			__( 'Diagrams', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			__( 'Diagrams', 'graphdraw-flowcharts-for-mermaid' ),
 			'__return_null',
 			self::PAGE
 		);
 
 		add_settings_field(
 			Options::RENDERER,
-			__( 'Renderer', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			__( 'Renderer', 'graphdraw-flowcharts-for-mermaid' ),
 			array( $this, 'render_renderer_field' ),
 			self::PAGE,
 			self::SECTION
@@ -147,7 +147,7 @@ final class SettingsPage implements Hookable {
 
 		add_settings_field(
 			Options::THEME,
-			__( 'Theme', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			__( 'Theme', 'graphdraw-flowcharts-for-mermaid' ),
 			array( $this, 'render_theme_field' ),
 			self::PAGE,
 			self::SECTION,
@@ -179,14 +179,14 @@ final class SettingsPage implements Hookable {
 	private function get_switches(): array {
 		return array(
 			Options::CODE_BLOCKS => array(
-				'title'       => __( 'Code blocks', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'label'       => __( 'Show code marked as Mermaid as diagrams', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'description' => __( 'Turns code with the <code>language-mermaid</code> class, such as Markdown code blocks, into diagrams for visitors. The editor still shows the code.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				'title'       => __( 'Code blocks', 'graphdraw-flowcharts-for-mermaid' ),
+				'label'       => __( 'Show code marked as Mermaid as diagrams', 'graphdraw-flowcharts-for-mermaid' ),
+				'description' => __( 'Turns code with the <code>language-mermaid</code> class, such as Markdown code blocks, into diagrams for visitors. The editor still shows the code.', 'graphdraw-flowcharts-for-mermaid' ),
 			),
 			Options::SAVE_IMAGES => array(
-				'title'       => __( 'Saved images', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'label'       => __( 'Save an image of each diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'description' => __( 'Feeds and browsers without JavaScript show the image instead of the code. The block editor saves it when you open or save a post.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				'title'       => __( 'Saved images', 'graphdraw-flowcharts-for-mermaid' ),
+				'label'       => __( 'Save an image of each diagram', 'graphdraw-flowcharts-for-mermaid' ),
+				'description' => __( 'Feeds and browsers without JavaScript show the image instead of the code. The block editor saves it when you open or save a post.', 'graphdraw-flowcharts-for-mermaid' ),
 			),
 		);
 	}
@@ -241,8 +241,8 @@ final class SettingsPage implements Hookable {
 	 */
 	public function add_page(): void {
 		add_options_page(
-			__( 'GraphDraw', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			__( 'GraphDraw', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			__( 'GraphDraw', 'graphdraw-flowcharts-for-mermaid' ),
+			__( 'GraphDraw', 'graphdraw-flowcharts-for-mermaid' ),
 			'manage_options',
 			self::PAGE,
 			array( $this, 'render_page' )
@@ -275,13 +275,13 @@ final class SettingsPage implements Hookable {
 	 */
 	public function render_renderer_field(): void {
 		$labels = array(
-			Renderers::MERMAID => __( 'Mermaid.js', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			Renderers::PELE    => __( 'Pele', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			Renderers::MERMAID => __( 'Mermaid.js', 'graphdraw-flowcharts-for-mermaid' ),
+			Renderers::PELE    => __( 'Pele', 'graphdraw-flowcharts-for-mermaid' ),
 		);
 		$stored = $this->options->get_site_renderer();
 		?>
 		<fieldset aria-describedby="graphdraw_renderer_description">
-			<legend class="screen-reader-text"><span><?php esc_html_e( 'Renderer', 'graphdraw-mermaid-diagrams-flowcharts' ); ?></span></legend>
+			<legend class="screen-reader-text"><span><?php esc_html_e( 'Renderer', 'graphdraw-flowcharts-for-mermaid' ); ?></span></legend>
 			<?php foreach ( $labels as $name => $label ) : ?>
 				<label>
 					<input type="radio" name="<?php echo esc_attr( Options::RENDERER ); ?>" value="<?php echo esc_attr( $name ); ?>" <?php checked( $stored, $name ); ?>>
@@ -290,7 +290,7 @@ final class SettingsPage implements Hookable {
 				<br>
 			<?php endforeach; ?>
 			<p class="description" id="graphdraw_renderer_description">
-				<?php esc_html_e( 'Draws every diagram of the site. Pele loads less and draws faster, in a plain look of its own: themes then count as light or dark.', 'graphdraw-mermaid-diagrams-flowcharts' ); ?>
+				<?php esc_html_e( 'Draws every diagram of the site. Pele loads less and draws faster, in a plain look of its own: themes then count as light or dark.', 'graphdraw-flowcharts-for-mermaid' ); ?>
 			</p>
 		</fieldset>
 		<?php
@@ -325,7 +325,7 @@ final class SettingsPage implements Hookable {
 			<?php endforeach; ?>
 		</select>
 		<p class="description" id="graphdraw_theme_description">
-			<?php esc_html_e( 'Automatic turns dark on dark backgrounds. Each diagram block can use its own theme.', 'graphdraw-mermaid-diagrams-flowcharts' ); ?>
+			<?php esc_html_e( 'Automatic turns dark on dark backgrounds. Each diagram block can use its own theme.', 'graphdraw-flowcharts-for-mermaid' ); ?>
 		</p>
 		<?php
 	}
@@ -380,7 +380,7 @@ final class SettingsPage implements Hookable {
 		$link  = sprintf(
 			'<a href="%s">%s</a>',
 			esc_url( $this->get_url() ),
-			esc_html__( 'Settings', 'graphdraw-mermaid-diagrams-flowcharts' )
+			esc_html__( 'Settings', 'graphdraw-flowcharts-for-mermaid' )
 		);
 
 		array_unshift( $links, $link );

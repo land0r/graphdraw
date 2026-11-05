@@ -26,7 +26,7 @@ const THEME_OPTIONS = [
 		value: '',
 		label: sprintf(
 			/* translators: %s: name of the theme set for the whole site, such as "Automatic" or "Forest". */
-			__( 'Site default (%s)', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			__( 'Site default (%s)', 'graphdraw-flowcharts-for-mermaid' ),
 			THEME_LABELS[ getShownTheme( SITE_THEME ) ] || SITE_THEME
 		),
 	},
@@ -40,28 +40,19 @@ const THEME_OPTIONS = [
 const VISITOR_CONTROLS = [
 	{
 		attribute: 'zoom',
-		label: __( 'Zoom controls', 'graphdraw-mermaid-diagrams-flowcharts' ),
+		label: __( 'Zoom controls', 'graphdraw-flowcharts-for-mermaid' ),
 	},
 	{
 		attribute: 'download',
-		label: __(
-			'Download buttons',
-			'graphdraw-mermaid-diagrams-flowcharts'
-		),
+		label: __( 'Download buttons', 'graphdraw-flowcharts-for-mermaid' ),
 	},
 	{
 		attribute: 'copy',
-		label: __(
-			'Copy code button',
-			'graphdraw-mermaid-diagrams-flowcharts'
-		),
+		label: __( 'Copy code button', 'graphdraw-flowcharts-for-mermaid' ),
 	},
 	{
 		attribute: 'fullscreen',
-		label: __(
-			'Fullscreen button',
-			'graphdraw-mermaid-diagrams-flowcharts'
-		),
+		label: __( 'Fullscreen button', 'graphdraw-flowcharts-for-mermaid' ),
 	},
 ];
 
@@ -80,23 +71,17 @@ export default function DiagramSettings( { attributes, setAttributes } ) {
 	return (
 		<InspectorControls>
 			<PanelBody
-				title={ __(
-					'Settings',
-					'graphdraw-mermaid-diagrams-flowcharts'
-				) }
+				title={ __( 'Settings', 'graphdraw-flowcharts-for-mermaid' ) }
 			>
 				<SelectControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __(
-						'Theme',
-						'graphdraw-mermaid-diagrams-flowcharts'
-					) }
+					label={ __( 'Theme', 'graphdraw-flowcharts-for-mermaid' ) }
 					help={
 						<>
 							{ __(
 								'Automatic turns dark on dark backgrounds. A theme set in the code overrides this.',
-								'graphdraw-mermaid-diagrams-flowcharts'
+								'graphdraw-flowcharts-for-mermaid'
 							) }
 							{ SETTINGS_URL && (
 								<>
@@ -104,7 +89,7 @@ export default function DiagramSettings( { attributes, setAttributes } ) {
 									<ExternalLink href={ SETTINGS_URL }>
 										{ __(
 											'Change the site default',
-											'graphdraw-mermaid-diagrams-flowcharts'
+											'graphdraw-flowcharts-for-mermaid'
 										) }
 									</ExternalLink>
 								</>
@@ -121,13 +106,13 @@ export default function DiagramSettings( { attributes, setAttributes } ) {
 			<PanelBody
 				title={ __(
 					'Visitor controls',
-					'graphdraw-mermaid-diagrams-flowcharts'
+					'graphdraw-flowcharts-for-mermaid'
 				) }
 			>
 				<p className="graphdraw-panel-help">
 					{ __(
 						'Buttons on the published diagram.',
-						'graphdraw-mermaid-diagrams-flowcharts'
+						'graphdraw-flowcharts-for-mermaid'
 					) }
 				</p>
 				{ VISITOR_CONTROLS.map( ( { attribute, label } ) => (
@@ -145,19 +130,16 @@ export default function DiagramSettings( { attributes, setAttributes } ) {
 			<PanelBody
 				title={ __(
 					'Accessibility',
-					'graphdraw-mermaid-diagrams-flowcharts'
+					'graphdraw-flowcharts-for-mermaid'
 				) }
 			>
 				<TextControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __(
-						'Title',
-						'graphdraw-mermaid-diagrams-flowcharts'
-					) }
+					label={ __( 'Title', 'graphdraw-flowcharts-for-mermaid' ) }
 					help={ __(
 						'A short name, read by screen readers.',
-						'graphdraw-mermaid-diagrams-flowcharts'
+						'graphdraw-flowcharts-for-mermaid'
 					) }
 					value={ accTitle || '' }
 					onChange={ ( value ) =>
@@ -168,11 +150,11 @@ export default function DiagramSettings( { attributes, setAttributes } ) {
 					__nextHasNoMarginBottom
 					label={ __(
 						'Description',
-						'graphdraw-mermaid-diagrams-flowcharts'
+						'graphdraw-flowcharts-for-mermaid'
 					) }
 					help={ __(
 						'What the diagram shows, read by screen readers.',
-						'graphdraw-mermaid-diagrams-flowcharts'
+						'graphdraw-flowcharts-for-mermaid'
 					) }
 					value={ accDescr || '' }
 					onChange={ ( value ) =>

@@ -235,7 +235,7 @@ final class Diagram {
 		return sprintf(
 			'<img class="graphdraw-diagram__image" src="%s" alt="%s" width="%d" height="%d" loading="lazy" decoding="async" />',
 			esc_url( $image['url'] ),
-			esc_attr( '' === $alt ? __( 'Diagram', 'graphdraw-mermaid-diagrams-flowcharts' ) : $alt ),
+			esc_attr( '' === $alt ? __( 'Diagram', 'graphdraw-flowcharts-for-mermaid' ) : $alt ),
 			(int) $image['width'],
 			(int) $image['height']
 		);

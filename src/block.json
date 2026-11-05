@@ -47,7 +47,7 @@
 			"type": "string"
 		}
 	},
-	"textdomain": "graphdraw-mermaid-diagrams-flowcharts",
+	"textdomain": "graphdraw-flowcharts-for-mermaid",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "graphdraw-diagram",

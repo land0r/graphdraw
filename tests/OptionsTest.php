@@ -246,7 +246,7 @@ class OptionsTest extends WP_UnitTestCase {
 		}
 
 		if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-			define( 'WP_UNINSTALL_PLUGIN', 'graphdraw-mermaid-diagrams-flowcharts/graphdraw-mermaid-diagrams-flowcharts.php' );
+			define( 'WP_UNINSTALL_PLUGIN', 'graphdraw-flowcharts-for-mermaid/graphdraw-flowcharts-for-mermaid.php' );
 		}
 
 		require dirname( __DIR__ ) . '/uninstall.php';

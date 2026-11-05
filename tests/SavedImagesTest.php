@@ -613,7 +613,7 @@ class SavedImagesTest extends WP_UnitTestCase {
 		file_put_contents( $this->get_upload_path( 'outside.png' ), 'kept' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- A file of the test.
 
 		if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-			define( 'WP_UNINSTALL_PLUGIN', 'graphdraw-mermaid-diagrams-flowcharts/graphdraw-mermaid-diagrams-flowcharts.php' );
+			define( 'WP_UNINSTALL_PLUGIN', 'graphdraw-flowcharts-for-mermaid/graphdraw-flowcharts-for-mermaid.php' );
 		}
 
 		require dirname( __DIR__ ) . '/uninstall.php';

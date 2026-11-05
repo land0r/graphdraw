@@ -36,7 +36,7 @@ final class Files {
 	/**
 	 * Returns what WordPress calls the plugin: its folder and main file.
 	 *
-	 * @return string The basename, such as `graphdraw-mermaid-diagrams-flowcharts/graphdraw-mermaid-diagrams-flowcharts.php`.
+	 * @return string The basename, such as `graphdraw-flowcharts-for-mermaid/graphdraw-flowcharts-for-mermaid.php`.
 	 */
 	public function get_basename(): string {
 		return plugin_basename( $this->plugin_file );
