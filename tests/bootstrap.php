@@ -30,7 +30,7 @@ tests_add_filter(
 			require $graphdraw_root . '/vendor/wordpress-plugin/elementor/elementor.php';
 		}
 
-		require $graphdraw_root . '/graphdraw-mermaid-diagrams-flowcharts.php';
+		require $graphdraw_root . '/graphdraw-flowcharts-for-mermaid.php';
 	}
 );
 

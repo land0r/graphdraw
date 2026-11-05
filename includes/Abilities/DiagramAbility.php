@@ -70,7 +70,7 @@ abstract class DiagramAbility extends Ability {
 		$code = isset( $input['code'] ) ? (string) $input['code'] : '';
 
 		if ( '' === trim( $code ) ) {
-			return $this->error( 'graphdraw_empty_code', __( 'The code of a diagram cannot be blank.', 'graphdraw-mermaid-diagrams-flowcharts' ) );
+			return $this->error( 'graphdraw_empty_code', __( 'The code of a diagram cannot be blank.', 'graphdraw-flowcharts-for-mermaid' ) );
 		}
 
 		return $code;

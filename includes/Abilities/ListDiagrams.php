@@ -64,7 +64,7 @@ final class ListDiagrams extends DiagramAbility {
 	 * @return string The label.
 	 */
 	protected function get_label(): string {
-		return __( 'List diagrams', 'graphdraw-mermaid-diagrams-flowcharts' );
+		return __( 'List diagrams', 'graphdraw-flowcharts-for-mermaid' );
 	}
 
 	/**
@@ -73,7 +73,7 @@ final class ListDiagrams extends DiagramAbility {
 	 * @return string The description.
 	 */
 	protected function get_description(): string {
-		return __( 'Lists the Mermaid diagrams in one post, or in every post that has some, most recently changed first. Each diagram comes with its code, its attributes, and the index and hash that address it.', 'graphdraw-mermaid-diagrams-flowcharts' );
+		return __( 'Lists the Mermaid diagrams in one post, or in every post that has some, most recently changed first. Each diagram comes with its code, its attributes, and the index and hash that address it.', 'graphdraw-flowcharts-for-mermaid' );
 	}
 
 	/**
@@ -87,12 +87,12 @@ final class ListDiagrams extends DiagramAbility {
 			'properties'           => array(
 				'post_id'   => array_merge(
 					$this->schemas->get_post_id(),
-					array( 'description' => __( 'The ID of a post, to list only its diagrams.', 'graphdraw-mermaid-diagrams-flowcharts' ) )
+					array( 'description' => __( 'The ID of a post, to list only its diagrams.', 'graphdraw-flowcharts-for-mermaid' ) )
 				),
 				'post_type' => array(
 					'type'        => 'string',
 					'enum'        => $this->posts->get_types(),
-					'description' => __( 'A post type, to list only the diagrams in posts of that type.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					'description' => __( 'A post type, to list only the diagrams in posts of that type.', 'graphdraw-flowcharts-for-mermaid' ),
 				),
 				'page'      => array(
 					'type'    => 'integer',
@@ -104,7 +104,7 @@ final class ListDiagrams extends DiagramAbility {
 					'minimum'     => 1,
 					'maximum'     => 100,
 					'default'     => self::PER_PAGE,
-					'description' => __( 'The number of posts on a page.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					'description' => __( 'The number of posts on a page.', 'graphdraw-flowcharts-for-mermaid' ),
 				),
 			),
 			'additionalProperties' => false,
@@ -139,7 +139,7 @@ final class ListDiagrams extends DiagramAbility {
 				),
 				'total'       => array(
 					'type'        => 'integer',
-					'description' => __( 'The number of posts with diagrams.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					'description' => __( 'The number of posts with diagrams.', 'graphdraw-flowcharts-for-mermaid' ),
 				),
 				'total_pages' => array( 'type' => 'integer' ),
 			),

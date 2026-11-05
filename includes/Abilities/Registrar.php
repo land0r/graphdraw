@@ -114,8 +114,8 @@ final class Registrar implements Hookable {
 	 */
 	public function get_category_args(): array {
 		return array(
-			'label'       => __( 'Mermaid diagrams', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'description' => __( 'Read, create, change and delete the Mermaid diagrams in posts.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			'label'       => __( 'Mermaid diagrams', 'graphdraw-flowcharts-for-mermaid' ),
+			'description' => __( 'Read, create, change and delete the Mermaid diagrams in posts.', 'graphdraw-flowcharts-for-mermaid' ),
 		);
 	}
 }

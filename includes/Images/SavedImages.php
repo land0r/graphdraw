@@ -329,7 +329,7 @@ final class SavedImages implements Hookable {
 		if ( ! preg_match( '/^[a-f0-9]{32}$/', $key ) ) {
 			return new WP_Error(
 				'graphdraw_image_invalid',
-				__( 'The key of the image is not valid.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'The key of the image is not valid.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -360,7 +360,7 @@ final class SavedImages implements Hookable {
 				'graphdraw_image_not_saved',
 				sprintf(
 					/* translators: %s: The reason, such as "Unable to create directory". */
-					__( 'The image could not be saved: %s', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					__( 'The image could not be saved: %s', 'graphdraw-flowcharts-for-mermaid' ),
 					$upload['error']
 				),
 				array( 'status' => 500 )
@@ -454,7 +454,7 @@ final class SavedImages implements Hookable {
 		if ( strlen( $png ) > self::MAX_BYTES ) {
 			return new WP_Error(
 				'graphdraw_image_too_large',
-				__( 'The image is too large.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'The image is too large.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 413 )
 			);
 		}
@@ -464,7 +464,7 @@ final class SavedImages implements Hookable {
 		if ( ! $size || IMAGETYPE_PNG !== $size[2] || $size[0] < 1 || $size[1] < 1 ) {
 			return new WP_Error(
 				'graphdraw_image_invalid',
-				__( 'The image is not a PNG file.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'The image is not a PNG file.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 400 )
 			);
 		}
@@ -472,7 +472,7 @@ final class SavedImages implements Hookable {
 		if ( $size[0] > self::MAX_SIDE || $size[1] > self::MAX_SIDE ) {
 			return new WP_Error(
 				'graphdraw_image_too_large',
-				__( 'The image is too large.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				__( 'The image is too large.', 'graphdraw-flowcharts-for-mermaid' ),
 				array( 'status' => 413 )
 			);
 		}

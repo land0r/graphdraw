@@ -15,7 +15,7 @@ module.exports = [
 		rules: {
 			'@wordpress/i18n-text-domain': [
 				'error',
-				{ allowedTextDomain: 'graphdraw-mermaid-diagrams-flowcharts' },
+				{ allowedTextDomain: 'graphdraw-flowcharts-for-mermaid' },
 			],
 			'import/no-unresolved': [ 'error', { ignore: [ '^@wordpress/' ] } ],
 			'jsdoc/no-undefined-types': [

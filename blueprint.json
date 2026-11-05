@@ -2,7 +2,7 @@
 	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
 	"landingPage": "/wp-admin/post-new.php?post_type=page",
 	"plugins": [
-		"https://github.com/land0r/graphdraw/releases/latest/download/graphdraw-mermaid-diagrams-flowcharts.zip"
+		"https://github.com/land0r/graphdraw/releases/latest/download/graphdraw-flowcharts-for-mermaid.zip"
 	],
 	"preferredVersions": {
 		"php": "8.2",

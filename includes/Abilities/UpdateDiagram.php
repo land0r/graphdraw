@@ -33,7 +33,7 @@ final class UpdateDiagram extends PostAbility {
 	 * @return string The label.
 	 */
 	protected function get_label(): string {
-		return __( 'Update a diagram', 'graphdraw-mermaid-diagrams-flowcharts' );
+		return __( 'Update a diagram', 'graphdraw-flowcharts-for-mermaid' );
 	}
 
 	/**
@@ -42,7 +42,7 @@ final class UpdateDiagram extends PostAbility {
 	 * @return string The description.
 	 */
 	protected function get_description(): string {
-		return __( 'Changes the code or the attributes of a Mermaid diagram in a post. Attributes left out stay as they are. It fails when the diagram changed since it was read, as its hash tells. The post is saved, with a revision.', 'graphdraw-mermaid-diagrams-flowcharts' );
+		return __( 'Changes the code or the attributes of a Mermaid diagram in a post. Attributes left out stay as they are. It fails when the diagram changed since it was read, as its hash tells. The post is saved, with a revision.', 'graphdraw-flowcharts-for-mermaid' );
 	}
 
 	/**
@@ -95,7 +95,7 @@ final class UpdateDiagram extends PostAbility {
 	 */
 	protected function run( WP_Post $post, array $input ) {
 		if ( ! isset( $input['code'] ) && empty( $input['attributes'] ) ) {
-			return $this->error( 'graphdraw_nothing_to_update', __( 'Give the diagram new code, or attributes to change.', 'graphdraw-mermaid-diagrams-flowcharts' ) );
+			return $this->error( 'graphdraw_nothing_to_update', __( 'Give the diagram new code, or attributes to change.', 'graphdraw-flowcharts-for-mermaid' ) );
 		}
 
 		$index = (int) $input['index'];

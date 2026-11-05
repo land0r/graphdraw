@@ -98,7 +98,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 				createErrorNotice(
 					__(
 						'The file could not be created.',
-						'graphdraw-mermaid-diagrams-flowcharts'
+						'graphdraw-flowcharts-for-mermaid'
 					),
 					{ type: 'snackbar' }
 				)
@@ -115,7 +115,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					createSuccessNotice(
 						__(
 							'Diagram copied as a PNG image.',
-							'graphdraw-mermaid-diagrams-flowcharts'
+							'graphdraw-flowcharts-for-mermaid'
 						),
 						{ type: 'snackbar' }
 					),
@@ -123,7 +123,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					createErrorNotice(
 						__(
 							'The image could not be copied.',
-							'graphdraw-mermaid-diagrams-flowcharts'
+							'graphdraw-flowcharts-for-mermaid'
 						),
 						{ type: 'snackbar' }
 					)
@@ -133,17 +133,11 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 
 	const exportControls = [
 		{
-			title: __(
-				'Download as SVG',
-				'graphdraw-mermaid-diagrams-flowcharts'
-			),
+			title: __( 'Download as SVG', 'graphdraw-flowcharts-for-mermaid' ),
 			onClick: () => downloadPreview( 'svg' ),
 		},
 		{
-			title: __(
-				'Download as PNG',
-				'graphdraw-mermaid-diagrams-flowcharts'
-			),
+			title: __( 'Download as PNG', 'graphdraw-flowcharts-for-mermaid' ),
 			onClick: () => downloadPreview( 'png' ),
 		},
 	];
@@ -151,7 +145,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 	// Only where the browser can put an image on the clipboard.
 	if ( canCopyImage() ) {
 		exportControls.push( {
-			title: __( 'Copy as PNG', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			title: __( 'Copy as PNG', 'graphdraw-flowcharts-for-mermaid' ),
 			onClick: copyPreview,
 		} );
 	}
@@ -163,7 +157,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					icon="download"
 					label={ __(
 						'Download or copy',
-						'graphdraw-mermaid-diagrams-flowcharts'
+						'graphdraw-flowcharts-for-mermaid'
 					) }
 					toggleProps={ { disabled: ! hasPreview } }
 					controls={ exportControls }
@@ -195,11 +189,11 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 						className="graphdraw-diagram__caption wp-element-caption"
 						aria-label={ __(
 							'Diagram caption',
-							'graphdraw-mermaid-diagrams-flowcharts'
+							'graphdraw-flowcharts-for-mermaid'
 						) }
 						placeholder={ __(
 							'Add caption',
-							'graphdraw-mermaid-diagrams-flowcharts'
+							'graphdraw-flowcharts-for-mermaid'
 						) }
 						value={ caption }
 						onChange={ ( value ) =>
@@ -214,25 +208,25 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					className="graphdraw-code"
 					label={ __(
 						'Mermaid Code',
-						'graphdraw-mermaid-diagrams-flowcharts'
+						'graphdraw-flowcharts-for-mermaid'
 					) }
 					help={
 						<>
 							{ __(
 								'Tab indents. To leave the field, press Esc, then Tab.',
-								'graphdraw-mermaid-diagrams-flowcharts'
+								'graphdraw-flowcharts-for-mermaid'
 							) }{ ' ' }
 							<ExternalLink href={ SYNTAX_URL }>
 								{ __(
 									'Mermaid syntax',
-									'graphdraw-mermaid-diagrams-flowcharts'
+									'graphdraw-flowcharts-for-mermaid'
 								) }
 							</ExternalLink>
 						</>
 					}
 					placeholder={ __(
 						'Write your MermaidJS code here…',
-						'graphdraw-mermaid-diagrams-flowcharts'
+						'graphdraw-flowcharts-for-mermaid'
 					) }
 					value={ code }
 					onChange={ ( value ) => setAttributes( { code: value } ) }

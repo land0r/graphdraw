@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       GraphDraw – Mermaid Diagrams & Flowcharts
+ * Plugin Name:       GraphDraw – Flowcharts for Mermaid
  * Plugin URI:        https://github.com/land0r/graphdraw
  * Description:       Draw Mermaid diagrams in the block editor, with a live preview: flowcharts, sequence, class and Gantt diagrams, mind maps and more.
  * Requires at least: 6.6
@@ -9,7 +9,7 @@
  * Author:            Ivan Hryhorenko
  * License:           GPL-3.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       graphdraw-mermaid-diagrams-flowcharts
+ * Text Domain:       graphdraw-flowcharts-for-mermaid
  *
  * @package GraphDraw
  */
@@ -31,7 +31,7 @@ function graphdraw_show_build_notice() {
 
 	$message = sprintf(
 		/* translators: 1: A command, 2: Another command. */
-		__( 'GraphDraw is missing its build. Run %1$s and %2$s in its folder, or install a release of the plugin.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+		__( 'GraphDraw is missing its build. Run %1$s and %2$s in its folder, or install a release of the plugin.', 'graphdraw-flowcharts-for-mermaid' ),
 		'<code>composer install</code>',
 		'<code>npm ci &amp;&amp; npm run build</code>'
 	);

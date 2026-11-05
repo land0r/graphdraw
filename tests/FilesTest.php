@@ -38,7 +38,7 @@ class FilesTest extends WP_UnitTestCase {
 	 */
 	public function test_knows_the_name_of_the_plugin(): void {
 		$this->assertSame( plugin_basename( GRAPHDRAW_PLUGIN_FILE ), $this->files->get_basename() );
-		$this->assertStringEndsWith( '/graphdraw-mermaid-diagrams-flowcharts.php', $this->files->get_basename() );
+		$this->assertStringEndsWith( '/graphdraw-flowcharts-for-mermaid.php', $this->files->get_basename() );
 	}
 
 	/**

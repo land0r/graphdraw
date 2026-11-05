@@ -31,8 +31,8 @@ final class DiagramTypes {
 	public function get_all(): array {
 		return array(
 			'class-diagram'    => array(
-				'title'       => __( 'Class Diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'description' => __( 'A class diagram to start from.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				'title'       => __( 'Class Diagram', 'graphdraw-flowcharts-for-mermaid' ),
+				'description' => __( 'A class diagram to start from.', 'graphdraw-flowcharts-for-mermaid' ),
 				'keyword'     => 'classDiagram',
 				'code'        => implode(
 					"\n",
@@ -56,15 +56,15 @@ final class DiagramTypes {
 					)
 				),
 				'keywords'    => array(
-					__( 'class', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'mermaid', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					__( 'class', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'diagram', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'mermaid', 'graphdraw-flowcharts-for-mermaid' ),
 				),
 				'icon'        => 'database',
 			),
 			'flowchart'        => array(
-				'title'       => __( 'Flowchart', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'description' => __( 'A flowchart to start from.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				'title'       => __( 'Flowchart', 'graphdraw-flowcharts-for-mermaid' ),
+				'description' => __( 'A flowchart to start from.', 'graphdraw-flowcharts-for-mermaid' ),
 				'keyword'     => 'flowchart',
 				'code'        => implode(
 					"\n",
@@ -78,14 +78,14 @@ final class DiagramTypes {
 					)
 				),
 				'keywords'    => array(
-					__( 'flowchart', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					__( 'flowchart', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'diagram', 'graphdraw-flowcharts-for-mermaid' ),
 				),
 				'icon'        => 'chart-bar',
 			),
 			'mindmap'          => array(
-				'title'       => __( 'Mind Map', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'description' => __( 'A mind map to start from.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				'title'       => __( 'Mind Map', 'graphdraw-flowcharts-for-mermaid' ),
+				'description' => __( 'A mind map to start from.', 'graphdraw-flowcharts-for-mermaid' ),
 				'keyword'     => 'mindmap',
 				'code'        => implode(
 					"\n",
@@ -108,15 +108,15 @@ final class DiagramTypes {
 					)
 				),
 				'keywords'    => array(
-					__( 'mindmap', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'mermaid', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					__( 'mindmap', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'diagram', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'mermaid', 'graphdraw-flowcharts-for-mermaid' ),
 				),
 				'icon'        => 'admin-users',
 			),
 			'sequence-diagram' => array(
-				'title'       => __( 'Sequence Diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'description' => __( 'A sequence diagram to start from.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				'title'       => __( 'Sequence Diagram', 'graphdraw-flowcharts-for-mermaid' ),
+				'description' => __( 'A sequence diagram to start from.', 'graphdraw-flowcharts-for-mermaid' ),
 				'keyword'     => 'sequenceDiagram',
 				'code'        => implode(
 					"\n",
@@ -133,15 +133,15 @@ final class DiagramTypes {
 					)
 				),
 				'keywords'    => array(
-					__( 'sequence', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'mermaid', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					__( 'sequence', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'diagram', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'mermaid', 'graphdraw-flowcharts-for-mermaid' ),
 				),
 				'icon'        => 'networking',
 			),
 			'state-diagram'    => array(
-				'title'       => __( 'State Diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-				'description' => __( 'A state diagram to start from.', 'graphdraw-mermaid-diagrams-flowcharts' ),
+				'title'       => __( 'State Diagram', 'graphdraw-flowcharts-for-mermaid' ),
+				'description' => __( 'A state diagram to start from.', 'graphdraw-flowcharts-for-mermaid' ),
 				'keyword'     => 'stateDiagram-v2',
 				'code'        => implode(
 					"\n",
@@ -156,9 +156,9 @@ final class DiagramTypes {
 					)
 				),
 				'keywords'    => array(
-					__( 'state', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'diagram', 'graphdraw-mermaid-diagrams-flowcharts' ),
-					__( 'mermaid', 'graphdraw-mermaid-diagrams-flowcharts' ),
+					__( 'state', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'diagram', 'graphdraw-flowcharts-for-mermaid' ),
+					__( 'mermaid', 'graphdraw-flowcharts-for-mermaid' ),
 				),
 				'icon'        => 'controls-play',
 			),

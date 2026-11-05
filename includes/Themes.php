@@ -60,18 +60,18 @@ final class Themes {
 	 */
 	public function get_all(): array {
 		return array(
-			'auto'             => __( 'Automatic', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'default'          => __( 'Default', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'neutral'          => __( 'Neutral', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'dark'             => __( 'Dark', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'forest'           => __( 'Forest', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'base'             => __( 'Base', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'neo'              => __( 'Neo', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'neo-dark'         => __( 'Neo Dark', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'redux'            => __( 'Redux', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'redux-dark'       => __( 'Redux Dark', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'redux-color'      => __( 'Redux Color', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'redux-dark-color' => __( 'Redux Dark Color', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			'auto'             => __( 'Automatic', 'graphdraw-flowcharts-for-mermaid' ),
+			'default'          => __( 'Default', 'graphdraw-flowcharts-for-mermaid' ),
+			'neutral'          => __( 'Neutral', 'graphdraw-flowcharts-for-mermaid' ),
+			'dark'             => __( 'Dark', 'graphdraw-flowcharts-for-mermaid' ),
+			'forest'           => __( 'Forest', 'graphdraw-flowcharts-for-mermaid' ),
+			'base'             => __( 'Base', 'graphdraw-flowcharts-for-mermaid' ),
+			'neo'              => __( 'Neo', 'graphdraw-flowcharts-for-mermaid' ),
+			'neo-dark'         => __( 'Neo Dark', 'graphdraw-flowcharts-for-mermaid' ),
+			'redux'            => __( 'Redux', 'graphdraw-flowcharts-for-mermaid' ),
+			'redux-dark'       => __( 'Redux Dark', 'graphdraw-flowcharts-for-mermaid' ),
+			'redux-color'      => __( 'Redux Color', 'graphdraw-flowcharts-for-mermaid' ),
+			'redux-dark-color' => __( 'Redux Dark Color', 'graphdraw-flowcharts-for-mermaid' ),
 		);
 	}
 
@@ -94,8 +94,8 @@ final class Themes {
 
 		return array(
 			self::AUTO => $themes[ self::AUTO ],
-			'default'  => __( 'Light', 'graphdraw-mermaid-diagrams-flowcharts' ),
-			'dark'     => __( 'Dark', 'graphdraw-mermaid-diagrams-flowcharts' ),
+			'default'  => __( 'Light', 'graphdraw-flowcharts-for-mermaid' ),
+			'dark'     => __( 'Dark', 'graphdraw-flowcharts-for-mermaid' ),
 		);
 	}
 

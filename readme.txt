@@ -1,4 +1,4 @@
-=== GraphDraw – Mermaid Diagrams & Flowcharts ===
+=== GraphDraw – Flowcharts for Mermaid ===
 Contributors:      land0r
 Tags:              diagrams, mermaid, flowchart, chart, block
 Requires at least: 6.6
@@ -156,7 +156,7 @@ A diagram is drawn in the visitor's browser, so a feed reader, or a browser that
 The diagrams of synced patterns, template parts, widgets and shortcodes get no image.
 
 ### Libraries:
-The diagrams are drawn by [Mermaid](https://mermaid.js.org/), by the Mermaid project (MIT licence), or by [Pele](https://pele.run/), by Obsidian (MIT licence). With Pele, formulas are typeset by [Temml](https://temml.org/), by Ron Kok (MIT licence). For a diagram that asks for the ELK layout, Mermaid uses [ELK](https://eclipse.dev/elk/), by the Eclipse Foundation, as elkjs (Eclipse Public License 2.0, which allows the GPL as a secondary licence). All four are included in the plugin. Mermaid's files also include the libraries Mermaid is built with, such as KaTeX, DOMPurify, D3, dagre and Cytoscape.js, under the MIT, ISC, Apache 2.0 and similar licences.
+The diagrams are drawn by [Mermaid](https://mermaid.js.org/), by the Mermaid project (MIT licence), or by [Pele](https://pele.run/), by Obsidian (MIT licence). With Pele, formulas are typeset by [Temml](https://temml.org/), by Ron Kok (MIT licence). For a diagram that asks for the ELK layout, Mermaid uses [ELK](https://eclipse.dev/elk/), by the Eclipse Foundation, as elkjs (Eclipse Public License 2.0, which allows the GPL as a secondary licence). All four are included in the plugin. GraphDraw is an independent plugin, not affiliated with or endorsed by the Mermaid project. Mermaid's files also include the libraries Mermaid is built with, such as KaTeX, DOMPurify, D3, dagre and Cytoscape.js, under the MIT, ISC, Apache 2.0 and similar licences.
 
 ### Source code:
 The JavaScript in the plugin's `build/` folder is compiled. Its source, with the build scripts, is on GitHub: [land0r/graphdraw](https://github.com/land0r/graphdraw). Run `npm ci && composer install && npm run build` there to build it.
@@ -169,7 +169,7 @@ Icon packs are the one exception, and only when a site adds them. A pack registe
 
 == Installation ==
 
-1. Install the plugin through Plugins → Add New, or upload its folder to `/wp-content/plugins/graphdraw-mermaid-diagrams-flowcharts/`.
+1. Install the plugin through Plugins → Add New, or upload its folder to `/wp-content/plugins/graphdraw-flowcharts-for-mermaid/`.
 2. Activate the plugin through the 'Plugins' menu.
 3. Add the **Mermaid Diagram** block in the block editor.
 4. Write Mermaid code and preview your diagram instantly.

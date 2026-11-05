@@ -33,7 +33,7 @@ final class DeleteDiagram extends PostAbility {
 	 * @return string The label.
 	 */
 	protected function get_label(): string {
-		return __( 'Delete a diagram', 'graphdraw-mermaid-diagrams-flowcharts' );
+		return __( 'Delete a diagram', 'graphdraw-flowcharts-for-mermaid' );
 	}
 
 	/**
@@ -42,7 +42,7 @@ final class DeleteDiagram extends PostAbility {
 	 * @return string The description.
 	 */
 	protected function get_description(): string {
-		return __( 'Removes a Mermaid diagram block from a post. It fails when the diagram changed since it was read, as its hash tells. The post is saved, with a revision to restore it from.', 'graphdraw-mermaid-diagrams-flowcharts' );
+		return __( 'Removes a Mermaid diagram block from a post. It fails when the diagram changed since it was read, as its hash tells. The post is saved, with a revision to restore it from.', 'graphdraw-flowcharts-for-mermaid' );
 	}
 
 	/**

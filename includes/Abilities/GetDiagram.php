@@ -33,7 +33,7 @@ final class GetDiagram extends PostAbility {
 	 * @return string The label.
 	 */
 	protected function get_label(): string {
-		return __( 'Get a diagram', 'graphdraw-mermaid-diagrams-flowcharts' );
+		return __( 'Get a diagram', 'graphdraw-flowcharts-for-mermaid' );
 	}
 
 	/**
@@ -42,7 +42,7 @@ final class GetDiagram extends PostAbility {
 	 * @return string The description.
 	 */
 	protected function get_description(): string {
-		return __( 'Returns one Mermaid diagram of a post: its code, its attributes, and the hash to pass when changing it.', 'graphdraw-mermaid-diagrams-flowcharts' );
+		return __( 'Returns one Mermaid diagram of a post: its code, its attributes, and the hash to pass when changing it.', 'graphdraw-flowcharts-for-mermaid' );
 	}
 
 	/**
