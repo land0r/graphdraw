@@ -1,0 +1,102 @@
+name: Deploy to WordPress.org
+
+on:
+  release:
+    types:
+      - published
+  # A dry run checks the build and the SVN credentials without committing.
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Run the deployment without committing to SVN
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+# One deployment at a time, and none cancelled halfway through an SVN commit.
+concurrency:
+  group: wordpress-org
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to WordPress.org
+    runs-on: ubuntu-latest
+    # Only the owner of the repository deploys: whoever publishes the release or
+    # starts the run, and whoever re-runs it.
+    if: github.actor == github.repository_owner && github.triggering_actor == github.repository_owner
+    # The SVN credentials are secrets of this environment, which only the owner
+    # can approve a deployment to.
+    environment:
+      name: wordpress-org
+      url: https://wordpress.org/plugins/graphdraw-flowcharts-for-mermaid/
+    permissions:
+      # To attach the plugin ZIP to the release.
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      # The version lives in four places, and the tag of a release must name it.
+      - name: Check the version
+        id: version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          for found in \
+            "$(sed -n 's/^ \* Version: *//p' graphdraw-flowcharts-for-mermaid.php | tr -d '[:space:]')" \
+            "$(sed -n 's/^Stable tag: *//p' readme.txt | tr -d '[:space:]')" \
+            "$(node -p "require('./src/block.json').version")"; do
+            if [ "$found" != "$version" ]; then
+              echo "::error::The versions don't match: $version in package.json, $found elsewhere."
+              exit 1
+            fi
+          done
+          if [ "$GITHUB_EVENT_NAME" = release ] && [ "${GITHUB_REF_NAME#v}" != "$version" ]; then
+            echo "::error::The tag $GITHUB_REF_NAME doesn't name version $version."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: 'npm'
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+
+      # What WordPress.org gets is what the zip holds: the build, the autoloader
+      # without development dependencies, and the `files` of package.json.
+      - name: Plugin ZIP
+        run: |
+          npm run plugin-zip
+          unzip -q graphdraw-flowcharts-for-mermaid.zip -d plugin-zip
+
+      - name: Deploy to WordPress.org
+        # 2.3.0, pinned to its commit: the action gets the SVN credentials.
+        uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2
+        with:
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }}
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: graphdraw-flowcharts-for-mermaid
+          VERSION: ${{ steps.version.outputs.version }}
+          BUILD_DIR: plugin-zip/graphdraw-flowcharts-for-mermaid
+
+      # The Playground blueprint installs the zip of the latest release.
+      - name: Attach the plugin ZIP to the release
+        if: github.event_name == 'release'
+        run: gh release upload "$GITHUB_REF_NAME" graphdraw-flowcharts-for-mermaid.zip --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
