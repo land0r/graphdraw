@@ -1,0 +1,18 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/post-new.php?post_type=page",
+	"plugins": [
+		"graphdraw-flowcharts-for-mermaid"
+	],
+	"preferredVersions": {
+		"php": "8.2",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"phpExtensionBundles": [
+		"kitchen-sink"
+	],
+	"login": true
+}
