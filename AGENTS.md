@@ -28,6 +28,8 @@ The pre-commit hook runs the three linters. CI (`.github/workflows/ci.yml`) runs
 
 Publishing a GitHub release runs `.github/workflows/deploy.yml`: it checks that the tag names the version, makes the release zip, commits what the zip holds to the plugin's SVN repository on WordPress.org, with the assets of `.wordpress-org/`, and attaches the zip to the release. Only the repository's owner can run it, and the SVN credentials are secrets of its `wordpress-org` environment. Started by hand, it is a dry run by default, which commits nothing.
 
+The plugin page changes without a release through `.github/workflows/deploy-assets.yml`, which a push to `main` that changes `.wordpress-org/` or `readme.txt` runs, or the owner by hand. It commits `.wordpress-org/` to SVN `assets/`, and `readme.txt` to `trunk/` and to the tag that `Stable tag` names, and nothing else. It deploys only once that tag is in SVN: after a version bump, the release deploys the readme. It has the guards of `deploy.yml`: the owner, the `wordpress-org` environment, and its concurrency group.
+
 `build/` and `vendor/` are generated and not committed. To try a change in WordPress, run `composer install` and `npm run build`, then use any local install with this directory in `wp-content/plugins/`, or run `npx @wp-playground/cli@latest start` here.
 
 ## Layout

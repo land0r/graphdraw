@@ -1,0 +1,85 @@
+name: Deploy the readme and assets to WordPress.org
+
+# A change to the plugin page alone needs no release: a banner, a screenshot,
+# the Live Preview blueprint, or `Tested up to` in readme.txt.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.wordpress-org/**'
+      - readme.txt
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check the stable tag
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.stable-tag.outputs.deploy }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      # Once a version bump is merged, `Stable tag` names a version that isn't
+      # in SVN yet. That readme waits for its release, which deploys it.
+      - name: Check that the stable tag is in SVN
+        id: stable-tag
+        run: |
+          version=$(sed -n 's/^Stable tag: *//p' readme.txt | tr -d '[:space:]')
+          if [ -z "$version" ]; then
+            echo "::error::readme.txt names no stable tag."
+            exit 1
+          fi
+          url="https://plugins.svn.wordpress.org/graphdraw-flowcharts-for-mermaid/tags/$version/"
+          status=$(curl --silent --head --output /dev/null --write-out '%{http_code}' "$url" || true)
+          case "$status" in
+            200)
+              echo "deploy=true" >> "$GITHUB_OUTPUT"
+              ;;
+            404)
+              echo "::notice::Version $version isn't in SVN yet, so nothing is deployed: its release deploys the readme and the assets."
+              echo "deploy=false" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "::error::Can't tell whether version $version is in SVN: $url gave HTTP status $status."
+              exit 1
+              ;;
+          esac
+
+  deploy:
+    name: Deploy the readme and assets
+    needs: check
+    runs-on: ubuntu-latest
+    # Only the owner of the repository deploys: whoever pushes to main or starts
+    # the run, and whoever re-runs it.
+    if: needs.check.outputs.deploy == 'true' && github.actor == github.repository_owner && github.triggering_actor == github.repository_owner
+    # The SVN credentials are secrets of this environment, which only the owner
+    # can approve a deployment to.
+    environment:
+      name: wordpress-org
+      url: https://wordpress.org/plugins/graphdraw-flowcharts-for-mermaid/
+    # The group of deploy.yml: one SVN commit at a time, none cancelled halfway.
+    concurrency:
+      group: wordpress-org
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Deploy the readme and assets
+        # 2.2.0, pinned to its commit: the action gets the SVN credentials.
+        uses: 10up/action-wordpress-plugin-asset-update@2480306f6f693672726d08b5917ea114cb2825f7
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: graphdraw-flowcharts-for-mermaid
+          # Copies only readme.txt to trunk. Otherwise the action copies the
+          # repository and stops, because trunk holds the release zip, with
+          # build/ and vendor/, which the repository doesn't commit.
+          IGNORE_OTHER_FILES: true
